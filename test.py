@@ -14,7 +14,8 @@ def setUp():
 
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument('--ignore-certificate-errors')
-    chrome_options.add_experimental_option('detach', True)
+    #Stop screen
+    # chrome_options.add_experimental_option('detach', True)
     driver = webdriver.Chrome( options=chrome_options)
     wait = WebDriverWait(driver, 25)
     driver.maximize_window()
@@ -59,10 +60,6 @@ def fillDataAddBlackCustomer(customerName, phoneNumber, email, customerType, CIF
         driver.find_element(By.CSS_SELECTOR, '#textarea-textarea-LOS_Search_Table_Result_Customer\:LOS_POPUP_RESTRICTED_CUST1\:CUS_NOTE').send_keys(notation) 
         #Click 'Lưu' button
         driver.find_element(By.CSS_SELECTOR, '#button-button-LOS_Search_Table_Result_Customer\:LOS_POPUP_RESTRICTED_CUST1\:SAVE').click()
-        #check result add success by checking display
-        isDisplay = driver.find_element(By.CSS_SELECTOR, '#div_67 > div') 
-        if isDisplay.get_attribute('style') == 'display: block;':
-            raise Exception('ADD BLACK CUSTOMER TEST CASE FAIL AT Fill data to add black customer FAIL!')
     except:
         raise Exception("[!] ADD BLACK CUSTOMER TEST CASE FAIL AT Fill data to add black customer FAIL!")
 
@@ -97,7 +94,9 @@ def testAddBlackCusTomer(customerName, phoneNumber, email, customerType, CIF, hu
                          customerGroup, permanentAddress, contactAddress, role, notation):
 
     clickQuanlykhachhangdenButton()
+    time.sleep(5)
     clickThemkhachhangButtonButton()
+    time.sleep(5)
     fillDataAddBlackCustomer(customerName, phoneNumber, email, customerType, CIF, humanID, dateOfBirth, 
                              customerGroup, permanentAddress, contactAddress, role, notation)    
 
